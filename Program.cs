@@ -12,6 +12,8 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+// Register logging middleware
+app.UseMiddleware<LoggingMiddleware>();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
