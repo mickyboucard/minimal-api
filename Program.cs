@@ -3,6 +3,9 @@ using MinimalApi.Db;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add response compression
+builder.Services.AddResponseCompression();
+
 // Add OpenAPI support
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -22,6 +25,12 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Minimal API v1");
     });
 }
+
+// Use response compression
+app.UseResponseCompression();
+
+// Enforces HTTPS
+app.UseHttpsRedirection();
 
 // Routes
 app.MapGet("/", () => "This is a simple minimal API to support a Pizza store");
